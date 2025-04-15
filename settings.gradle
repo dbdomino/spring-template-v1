@@ -1,0 +1,5 @@
+rootProject.name = 'spring-template-jhv1'
+include 'common-lib'
+include 'core-mod'
+include 'data-mod'
+
