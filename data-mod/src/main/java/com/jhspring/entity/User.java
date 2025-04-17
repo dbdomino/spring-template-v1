@@ -2,6 +2,7 @@ package com.jhspring.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,6 +25,10 @@ public class User {
 
     private String firstName;
     private String lastName;
+    private String address;
+    private LocalDate birthday;
+    private String gender;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

@@ -1,6 +1,5 @@
 spring:
   datasource:
-
     url: jdbc:mariadb://database-1.chmmjqgwy8hk.ap-northeast-2.rds.amazonaws.com:3306/database-1
     username: admin
     password: adminadmin
