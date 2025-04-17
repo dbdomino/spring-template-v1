@@ -2,4 +2,6 @@ rootProject.name = 'spring-template-jhv1'
 include 'common-lib'
 include 'core-mod'
 include 'data-mod'
+include 'app-mod:user-app'
+findProject(':app-mod:user-app')?.name = 'user-app'
 
