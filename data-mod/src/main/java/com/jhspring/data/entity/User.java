@@ -1,4 +1,5 @@
 package com.jhspring.data.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -6,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_mini_user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,21 +17,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idx;
 
+    @Column(unique = true)
+    private String id;
     private String username;
     private String password;
     private String email;
     private String phone;
 
-    private String firstName;
-    private String lastName;
     private String address;
     private LocalDate birthday;
     private String gender;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
     private boolean active;
 }
