@@ -1,19 +1,134 @@
 plugins {
+    id 'org.springframework.boot' version '3.4.4' apply false
+    id 'io.spring.dependency-management' version '1.1.4' apply false
     id 'java'
 }
 
 group = 'com.jhspring'
-version = '1.0-SNAPSHOT'
+version =  '1.0.0'
 
-repositories {
-    mavenCentral()
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17 // → Java 17 문법 사용한다는 소리
+    targetCompatibility = JavaVersion.VERSION_17 // → Java 17 런타임 이상에서 실행 가능한 .class 파일을 만든다.
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+subprojects { // 모든 하위 모듀들에 공통 적용할 설정
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.slf4j:slf4j-api:2.0.12' // 선택적으로 slf4j 로깅 인터페이스
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
-test {
-    useJUnitPlatform()
+project(':app-mod:user-app') {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation project(':common-lib')
+        implementation project(':core-mod')
+        implementation project(':data-mod')
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        // 메인 소스용 Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        // 테스트 소스용 Lombok
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+    }
+}
+
+project(':common-lib') {
+    dependencies {
+        implementation 'org.slf4j:slf4j-api:2.0.12'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+        implementation 'org.apache.commons:commons-lang3:3.13.0'
+    }
+}
+
+project(':core-mod') {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        // 만약 Filter 쓸 거면 추가:
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        // 테스트
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        // 메인 소스용 Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        // 테스트 소스용 Lombok
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+    }
+
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+}
+
+project(':data-mod') {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation project(':common-lib')
+        implementation project(':core-mod')
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+        implementation 'mysql:mysql-connector-java:8.0.33' // MySQL 드라이버
+
+        implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
+        annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
+        annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+        annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        // 메인 소스용 Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        // 테스트 소스용 Lombok
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+    }
+
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
 }
