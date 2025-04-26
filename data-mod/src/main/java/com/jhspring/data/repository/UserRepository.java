@@ -1,4 +1,4 @@
-package com.jhspring.data.repo;
+package com.jhspring.data.repository;
 
 import com.jhspring.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
