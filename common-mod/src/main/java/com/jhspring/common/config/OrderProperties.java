@@ -1,4 +1,4 @@
-package com.jhspring.core.config;
+package com.jhspring.common.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
