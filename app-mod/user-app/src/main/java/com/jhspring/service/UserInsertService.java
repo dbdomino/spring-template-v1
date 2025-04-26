@@ -1,7 +1,7 @@
 package com.jhspring.service;
 
-import com.jhspring.entity.User;
-import com.jhspring.repo.UserRepository;
+import com.jhspring.data.entity.User;
+import com.jhspring.data.repo.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
