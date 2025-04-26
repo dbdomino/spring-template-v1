@@ -13,7 +13,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17 // → Java 17 런타임 이상에서 실행 가능한 .class 파일을 만든다.
 }
 
-subprojects { // 모든 하위 모듀들에 공통 적용할 설정
+subprojects { // 모든 하위 모듈들에 공통 적용할 설정
     apply plugin: 'java'
 
     repositories {
@@ -24,6 +24,15 @@ subprojects { // 모든 하위 모듀들에 공통 적용할 설정
         implementation 'org.slf4j:slf4j-api:2.0.12' // 선택적으로 slf4j 로깅 인터페이스
         testImplementation platform('org.junit:junit-bom:5.10.0')
         testImplementation 'org.junit.jupiter:junit-jupiter'
+        implementation 'com.google.code.gson:gson:2.10.1'
+
+        // 메인 소스용 Lombok
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+        // 테스트 소스용 Lombok
+        testCompileOnly 'org.projectlombok:lombok:1.18.30'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
     }
 
     test {
@@ -46,13 +55,6 @@ project(':app-mod:user-app') {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        // 메인 소스용 Lombok
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-
-        // 테스트 소스용 Lombok
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 }
 
@@ -61,6 +63,7 @@ project(':common-lib') {
         implementation 'org.slf4j:slf4j-api:2.0.12'
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
         implementation 'org.apache.commons:commons-lang3:3.13.0'
+
     }
 }
 
@@ -69,21 +72,13 @@ project(':core-mod') {
     apply plugin: 'io.spring.dependency-management'
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter'
-        implementation 'org.springframework.boot:spring-boot-starter-aop'
-        // 만약 Filter 쓸 거면 추가:
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter'     // spring boot 쓰려면 기본.
+        implementation 'org.springframework.boot:spring-boot-starter-aop' // apo 기능 추가
+        implementation 'org.springframework.boot:spring-boot-starter-web' // MVC 컨트롤러, Interceptor Filter 쓸 거면 추가:
 
-        // 테스트
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트 파일 만들려면
 
-        // 메인 소스용 Lombok
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
 
-        // 테스트 소스용 Lombok
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 
     bootJar {
@@ -111,18 +106,7 @@ project(':data-mod') {
         annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
         annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
 
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-        // 메인 소스용 Lombok
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-
-        // 테스트 소스용 Lombok
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 
     bootJar {
