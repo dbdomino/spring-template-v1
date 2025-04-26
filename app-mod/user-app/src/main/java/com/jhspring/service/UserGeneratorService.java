@@ -58,17 +58,7 @@ public class UserGeneratorService {
         String gender = random.nextBoolean() ? "M" : "F";
         LocalDateTime now = LocalDateTime.now();
 
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setBirthday(birthday);
-        user.setGender(gender);
-        user.setCreatedAt(now);
-        user.setUpdatedAt(now);
 
-        return user;
+        return null;
     }
 }
