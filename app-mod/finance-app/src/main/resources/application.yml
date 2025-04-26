@@ -1,0 +1,17 @@
+spring:
+  config:
+    import:
+      - classpath:/config-data-${spring.profiles.active}.yml
+      - classpath:/config-core-${spring.profiles.active}.yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev

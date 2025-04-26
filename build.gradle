@@ -58,6 +58,24 @@ project(':app-mod:user-app') {
     }
 }
 
+project(':app-mod:finance-app') {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation project(':common-lib')
+        implementation project(':core-mod')
+        implementation project(':data-mod')
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+}
+
 project(':common-lib') {
     dependencies {
         implementation 'org.slf4j:slf4j-api:2.0.12'
