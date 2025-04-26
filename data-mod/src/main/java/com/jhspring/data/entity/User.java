@@ -1,4 +1,4 @@
-package com.jhspring.entity;
+package com.jhspring.data.entity;
 import jakarta.persistence.*;
 import lombok.*;
 

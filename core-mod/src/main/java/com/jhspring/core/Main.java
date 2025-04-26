@@ -1,4 +1,4 @@
-package com.jhspring;
+package com.jhspring.core;
 
 public class Main {
     public static void main(String[] args) {
