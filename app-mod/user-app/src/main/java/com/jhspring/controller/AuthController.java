@@ -1,10 +1,6 @@
 package com.jhspring.controller;
 
-import com.jhspring.core.user.LoginUser;
-import com.jhspring.data.entity.User;
-import com.jhspring.data.servicie.LoginUserImpl;
 import com.jhspring.service.inf.AuthService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

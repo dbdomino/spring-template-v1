@@ -22,4 +22,10 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+    public User login(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+
 }
