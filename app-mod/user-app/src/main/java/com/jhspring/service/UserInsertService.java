@@ -1,6 +1,6 @@
 package com.jhspring.service;
 
-import com.jhspring.data.entity.User;
+import com.jhspring.data.entity.UserEntity;
 import com.jhspring.data.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ public class UserInsertService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void insert(User user) {
+    public void insert(UserEntity user) {
         userRepository.save(user);
     }
 }

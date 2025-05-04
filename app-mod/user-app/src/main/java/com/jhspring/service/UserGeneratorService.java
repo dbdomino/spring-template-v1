@@ -1,6 +1,6 @@
 package com.jhspring.service;
 
-import com.jhspring.data.entity.User;
+import com.jhspring.data.entity.UserEntity;
 import com.jhspring.data.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +39,7 @@ public class UserGeneratorService {
 
         // 훨씬 오래걸리겠지.
         for (int i = 0; i < total; i += 1) {
-            User user = randomUser();
+            UserEntity user = randomUser();
             userInsertService.insert(user);  // 👉 한 건마다 별도 트랜잭션
             log.info("{} ~ {} 저장 완료.", i+1, i + batchSize);
         }
@@ -47,7 +47,7 @@ public class UserGeneratorService {
         System.out.println("🎉 유저 생성 완료!");
     }
 
-    private User randomUser() {
+    private UserEntity randomUser() {
         String uuid = UUID.randomUUID().toString().substring(0, 8);
         String username = "user_" + uuid;
         String email = username + "@example.com";
