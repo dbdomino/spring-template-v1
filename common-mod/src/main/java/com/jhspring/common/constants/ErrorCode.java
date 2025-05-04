@@ -19,6 +19,8 @@ public enum ErrorCode {
     AUTH_FAIL(1001, "인증실패"),
     // === 2xxx User ERROR ===
     LOGIN_FAIL(2001, "로그인 실패"),
+    DUPLICATE_ID_REGIST_FAIL(2002, "회원가입 실패, 중복된 ID존재"),
+
     // === 9xxx etc ERROR ===
     ETC_ERROR(9999, "일반적인 실패");
 
