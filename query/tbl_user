@@ -1,0 +1,21 @@
+    create table tbl_user (
+        idx bigint not null auto_increment,
+        address varchar(255),
+        birthday date,
+        create_date datetime(6),
+        email varchar(255),
+        gender varchar(255),
+        id varchar(255),
+        name varchar(255),
+        password varchar(255),
+        phone varchar(255),
+        status bit not null,
+        update_date datetime(6),
+        primary key (idx)
+    ) engine=InnoDB
+
+    alter table tbl_user
+       drop index UK82150kfmu3ud71gcqjgkalao4
+
+    alter table tbl_user
+       add constraint UK82150kfmu3ud71gcqjgkalao4 unique (id)
