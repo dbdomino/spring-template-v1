@@ -32,6 +32,10 @@ public class User {
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private LocalDateTime lastLoginDate;
+
+    // JWT 용 필드
+    private String refreshToken;
 
     private boolean active;
 }
