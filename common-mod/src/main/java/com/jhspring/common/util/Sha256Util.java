@@ -1,9 +1,12 @@
 package com.jhspring.common.util;
 
+import org.springframework.stereotype.Service;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@Service
 public class Sha256Util {
     public static String encrypt(String rawPassword) {
         try {

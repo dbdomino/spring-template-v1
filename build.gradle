@@ -33,6 +33,9 @@ subprojects { // 모든 하위 모듈들에 공통 적용할 설정
         // 테스트 소스용 Lombok
         testCompileOnly 'org.projectlombok:lombok:1.18.30'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+        implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     }
 
     test {
@@ -95,6 +98,7 @@ project(':common-mod') {
         implementation 'org.springframework.boot:spring-boot-starter-web' // MVC 컨트롤러, Interceptor Filter 쓸 거면 추가:
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트 파일 만들려면
+        implementation 'org.springframework.boot:spring-boot-starter-security' // bcrypt 암호화
     }
 
     bootJar {
