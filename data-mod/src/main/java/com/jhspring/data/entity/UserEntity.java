@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class User {
 
     @Column(unique = true)
     private String id;
-    private String username;
+    private String name;
     private String password;
     private String email;
     private String phone;
@@ -37,5 +37,5 @@ public class User {
     // JWT 용 필드
     private String refreshToken;
 
-    private boolean active;
+    private boolean status;
 }
