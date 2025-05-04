@@ -5,14 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginResDto {
-    private boolean success;
+public class FindmeResDto {
     private String id;
     private String name;
+    private String email;
 
-    public LoginResDto(boolean success, String id, String name) {
-        this.success = success;
+    public FindmeResDto(String id, String name, String email) {
         this.id = id;
         this.name = name;
+        this.email = email;
     }
 }
