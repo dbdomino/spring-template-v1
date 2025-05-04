@@ -1,2 +1,5 @@
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: 30m  # 30분 비활동 시 세션 만료
