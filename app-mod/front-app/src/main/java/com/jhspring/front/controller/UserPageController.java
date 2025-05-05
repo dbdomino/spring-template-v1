@@ -48,7 +48,7 @@ public class UserPageController {
     // 로그인 처리
     @PostMapping("/login")
     public String loginProcess(LoginReqDto req, HttpSession session, RedirectAttributes redirect) {
-        LoginResDto res = userPageService.login(req);
+        LoginResDto res = userPageService.login(req, session);
         if (res == null) {
             redirect.addFlashAttribute("code", ErrorCode.LOGIN_FAIL.getMessage());
             redirect.addFlashAttribute("message", ErrorCode.LOGIN_FAIL.getMessage());
