@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public abstract class UserPageServiceImpl implements UserPageService {
+public class UserPageServiceImpl implements UserPageService {
 
     private final RestClient restClient = RestClient.builder()
             .baseUrl("http://localhost:8081")
@@ -81,6 +81,20 @@ public abstract class UserPageServiceImpl implements UserPageService {
         return response.getData();
     }
 
+    @Override
+    public void logout(HttpSession session) {
+        String jsessionId = (String) session.getAttribute("userAppSessionId");
+        if (jsessionId == null) return;
+
+        restClient.post()
+                .uri(BackendUri.LOGOUT.getUri())
+                .header("Cookie", "JSESSIONID=" + jsessionId)
+                .retrieve()
+                .toBodilessEntity(); // 응답 내용 무시
+
+        // 프론트 세션도 정리
+        session.invalidate();
+    }
 
 
     private String extractJsessionId(List<String> cookies) {

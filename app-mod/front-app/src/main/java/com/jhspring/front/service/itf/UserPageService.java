@@ -11,4 +11,5 @@ public interface UserPageService {
     LoginResDto login(LoginReqDto reqDto, HttpSession session);
     RegistUserResDto register(RegistUserReqDto reqDto);
     FindmeResDto me(HttpSession session);
+    void logout(HttpSession session);
 }
