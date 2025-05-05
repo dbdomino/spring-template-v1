@@ -18,12 +18,14 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class UserPageServiceImpl implements UserPageService {
 
     private final RestClient userAppRestClient; // Bean 주입 받음
+    private RestClient userClient = RestClient.builder()
+            .baseUrl("http://localhost:8081")
+            .build();
 
     @Override
     public LoginResDto login(LoginReqDto reqDto, HttpSession session) {
@@ -36,7 +38,7 @@ public class UserPageServiceImpl implements UserPageService {
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {}); // 제네릭 응답 파싱
 */
-        ResponseEntity<ApiResponse<LoginResDto>> response = userAppRestClient.post()
+        ResponseEntity<ApiResponse<LoginResDto>> response = userClient.post()
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
@@ -54,13 +56,17 @@ public class UserPageServiceImpl implements UserPageService {
     @Override
     public RegistUserResDto register(RegistUserReqDto reqDto) {
         BackendUri uri = BackendUri.REGISTER;
-
-        ApiResponse<RegistUserResDto> response = userAppRestClient.post()
+        System.out.println("[DEBUG] 호출 전 URI = " + uri.getUri());  // /api/v1/user/register
+        System.out.println("[DEBUG] RestClient class = " + userClient.getClass());
+        System.out.println("[DEBUG] RestClient class = " + userClient.toString());
+        ApiResponse<RegistUserResDto> response = userClient.post()
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {
                 });
+        System.out.println("[DEBUG] 호출 후 URI = " + uri.getUri());  // /api/v1/user/register
+        System.out.println("[DEBUG] RestClient class = " + userClient.getClass());
 
         return response.getData();
     }
@@ -72,7 +78,7 @@ public class UserPageServiceImpl implements UserPageService {
         String jsessionId = (String) session.getAttribute("userAppSessionId");
         if (jsessionId == null) return null;
 
-        ApiResponse<FindmeResDto> response = userAppRestClient.get()
+        ApiResponse<FindmeResDto> response = userClient.get()
                 .uri(uri.getUri())
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
@@ -87,7 +93,7 @@ public class UserPageServiceImpl implements UserPageService {
         String jsessionId = (String) session.getAttribute("userAppSessionId");
         if (jsessionId == null) return;
 
-        userAppRestClient.post()
+        userClient.post()
                 .uri(BackendUri.LOGOUT.getUri())
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
