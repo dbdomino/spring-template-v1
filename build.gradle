@@ -79,6 +79,19 @@ project(':app-mod:finance-app') {
     }
 }
 
+project(':app-mod:front-app') {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation project(':common-mod')
+        implementation project(':core-mod')
+
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+
 project(':core-mod') {
     dependencies {
         implementation 'org.slf4j:slf4j-api:2.0.12'
