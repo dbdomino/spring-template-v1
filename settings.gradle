@@ -1,4 +1,4 @@
-rootProject.name = 'spring-template-jhv1'
+rootProject.name = 'spring-template-api-v1.0'
 include 'core-mod'
 include 'data-mod'
 include 'common-mod'
