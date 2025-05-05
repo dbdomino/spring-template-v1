@@ -23,9 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserPageServiceImpl implements UserPageService {
 
-    private final RestClient restClient = RestClient.builder()
-            .baseUrl("http://localhost:8081")
-            .build();
+    private final RestClient userAppRestClient; // Bean 주입 받음
 
     @Override
     public LoginResDto login(LoginReqDto reqDto, HttpSession session) {
@@ -38,7 +36,7 @@ public class UserPageServiceImpl implements UserPageService {
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {}); // 제네릭 응답 파싱
 */
-        ResponseEntity<ApiResponse<LoginResDto>> response = restClient.post()
+        ResponseEntity<ApiResponse<LoginResDto>> response = userAppRestClient.post()
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
@@ -57,7 +55,7 @@ public class UserPageServiceImpl implements UserPageService {
     public RegistUserResDto register(RegistUserReqDto reqDto) {
         BackendUri uri = BackendUri.REGISTER;
 
-        ApiResponse<RegistUserResDto> response = restClient.post()
+        ApiResponse<RegistUserResDto> response = userAppRestClient.post()
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
@@ -74,7 +72,7 @@ public class UserPageServiceImpl implements UserPageService {
         String jsessionId = (String) session.getAttribute("userAppSessionId");
         if (jsessionId == null) return null;
 
-        ApiResponse<FindmeResDto> response = restClient.get()
+        ApiResponse<FindmeResDto> response = userAppRestClient.get()
                 .uri(uri.getUri())
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
@@ -89,7 +87,7 @@ public class UserPageServiceImpl implements UserPageService {
         String jsessionId = (String) session.getAttribute("userAppSessionId");
         if (jsessionId == null) return;
 
-        restClient.post()
+        userAppRestClient.post()
                 .uri(BackendUri.LOGOUT.getUri())
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
