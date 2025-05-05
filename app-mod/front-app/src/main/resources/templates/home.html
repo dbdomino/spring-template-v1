@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head><title>홈</title></head>
+<body>
+<div layout:fragment="content" class="text-center">
+    <h1>Welcome to MyApp</h1>
+    <p>로그인하거나 회원가입해서 시작하세요.</p>
+    <a th:href="@{/login}" class="btn btn-primary me-2">로그인</a>
+    <a th:href="@{/signup}" class="btn btn-secondary">회원가입</a>
+</div>
+</body>
+</html>
