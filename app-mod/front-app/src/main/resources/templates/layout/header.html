@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">MyApp</a>
+            <div>
+                <a th:href="@{/home}" class="btn btn-sm btn-outline-light">Home</a>
+                <a th:href="@{/login}" class="btn btn-sm btn-outline-light me-2">로그인</a>
+                <a th:href="@{/signup}" class="btn btn-sm btn-outline-light">회원가입</a>
+            </div>
+        </div>
+    </nav>
+</header>
+</html>

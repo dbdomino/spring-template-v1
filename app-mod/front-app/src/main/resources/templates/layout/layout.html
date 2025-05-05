@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$TITLE - MyApp">MyApp</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<!-- 헤더 -->
+<div th:replace="layout/header :: header"></div>
+
+<!-- 본문 영역 -->
+<div class="container mt-4" layout:fragment="content"></div>
+
+<!-- 푸터 -->
+<div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>
