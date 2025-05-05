@@ -2,7 +2,9 @@ package com.jhspring.front.controller;
 
 import com.jhspring.common.constants.ErrorCode;
 import com.jhspring.front.dto.req.LoginReqDto;
+import com.jhspring.front.dto.req.RegistUserReqDto;
 import com.jhspring.front.dto.res.LoginResDto;
+import com.jhspring.front.dto.res.RegistUserResDto;
 import com.jhspring.front.service.itf.UserPageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -58,6 +60,13 @@ public class UserPageController {
         session.setAttribute("loginUserEmail", res.getEmail());
 
         return "redirect:/dashboard";
+    }
+
+    @PostMapping("/signup")
+    public String signup(RegistUserReqDto req, RedirectAttributes redirect) {
+        RegistUserResDto res = userPageService.register(req);
+        redirect.addFlashAttribute("message", res.getMessage()); // "가입을 축하합니다" 등
+        return "redirect:/login";
     }
 
 }

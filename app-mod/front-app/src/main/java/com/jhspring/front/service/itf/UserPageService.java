@@ -1,8 +1,11 @@
 package com.jhspring.front.service.itf;
 
 import com.jhspring.front.dto.req.LoginReqDto;
+import com.jhspring.front.dto.req.RegistUserReqDto;
 import com.jhspring.front.dto.res.LoginResDto;
+import com.jhspring.front.dto.res.RegistUserResDto;
 
 public interface UserPageService {
-    public LoginResDto login(LoginReqDto reqDto);
+    LoginResDto login(LoginReqDto reqDto);
+    RegistUserResDto register(RegistUserReqDto reqDto);
 }
