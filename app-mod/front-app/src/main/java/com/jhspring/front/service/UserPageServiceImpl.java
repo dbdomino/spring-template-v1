@@ -22,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserPageServiceImpl implements UserPageService {
 
-    private final RestClient userAppRestClient; // Bean 주입 받음
     private RestClient userClient = RestClient.builder()
             .baseUrl("http://localhost:8081")
             .build();
