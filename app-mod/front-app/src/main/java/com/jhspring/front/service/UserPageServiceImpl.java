@@ -42,7 +42,8 @@ public class UserPageServiceImpl implements UserPageService {
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
-                .toEntity(new ParameterizedTypeReference<>() {});
+                .toEntity(new ParameterizedTypeReference<>() {
+                });
         // JSESSIONID 추출
         List<String> cookies = response.getHeaders().get(HttpHeaders.SET_COOKIE);
         String jsessionId = extractJsessionId(cookies);
@@ -60,13 +61,14 @@ public class UserPageServiceImpl implements UserPageService {
                 .uri(uri.getUri())
                 .body(reqDto)
                 .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
+                .body(new ParameterizedTypeReference<>() {
+                });
 
         return response.getData();
     }
 
     @Override
-    public FindmeResDto me(HttpSession session){
+    public FindmeResDto me(HttpSession session) {
         BackendUri uri = BackendUri.ME;
 
         String jsessionId = (String) session.getAttribute("userAppSessionId");
@@ -76,7 +78,8 @@ public class UserPageServiceImpl implements UserPageService {
                 .uri(uri.getUri())
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
+                .body(new ParameterizedTypeReference<>() {
+                });
 
         return response.getData();
     }
@@ -106,4 +109,5 @@ public class UserPageServiceImpl implements UserPageService {
         }
         return null;
     }
+
 }
