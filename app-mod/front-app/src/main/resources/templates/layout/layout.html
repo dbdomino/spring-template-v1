@@ -11,6 +11,11 @@
 <!-- 헤더 -->
 <div th:replace="layout/header :: header"></div>
 
+<!-- 메시지 알림 영역 -->
+<div class="container mt-3" th:if="${param.message}">
+    <div class="alert alert-info text-center" th:text="${param.message}"></div>
+</div>
+
 <!-- 본문 영역 -->
 <div class="container mt-4" layout:fragment="content"></div>
 

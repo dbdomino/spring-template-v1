@@ -4,10 +4,20 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/}">MyApp</a>
-            <div>
-                <a th:href="@{/home}" class="btn btn-sm btn-outline-light">Home</a>
-                <a th:href="@{/login}" class="btn btn-sm btn-outline-light me-2">로그인</a>
-                <a th:href="@{/signup}" class="btn btn-sm btn-outline-light">회원가입</a>
+
+            <div class="d-flex">
+                <span class="navbar-text text-white me-3" th:if="${session.loginUser != null}"
+                      th:text="'환영합니다, ' + ${session.loginUser.username} + '님'"></span>
+
+                <div th:if="${session.loginUser == null}">
+                    <a th:href="@{/login}" class="btn btn-sm btn-outline-light me-2">로그인</a>
+                    <a th:href="@{/signup}" class="btn btn-sm btn-outline-light">회원가입</a>
+                </div>
+
+                <div th:if="${session.loginUser != null}">
+                    <a th:href="@{/dashboard}" class="btn btn-sm btn-outline-light me-2">대시보드</a>
+                    <a th:href="@{/logout}" class="btn btn-sm btn-outline-light">로그아웃</a>
+                </div>
             </div>
         </div>
     </nav>
