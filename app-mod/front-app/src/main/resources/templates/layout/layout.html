@@ -15,6 +15,7 @@
 <div class="container mt-3" th:if="${param.message}">
     <div class="alert alert-info text-center" th:text="${param.message}"></div>
 </div>
+<div th:if="${message}" class="alert alert-info" th:text="${message}"></div>
 
 <!-- 본문 영역 -->
 <div class="container mt-4" layout:fragment="content"></div>
