@@ -15,6 +15,5 @@ public interface UserDtoMapper {
     @Mapping(target = "success", ignore = true)
     LoginResDto toLoginDto(UserEntity entity);
 
-    @Mapping(target = "success", ignore = true)
     FindmeResDto toFindmeDto(UserEntity entity);
 }
