@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -33,11 +32,12 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(dto.getId())) {
             throw new CoException(ErrorCode.DUPLICATE_ID_REGIST_FAIL);
         }
-        UserEntity entity = userDtoMapper.toUserEntity(dto);
-        entity.setPassword(bcryptUtil.encode(dto.getPassword()));
-        entity.setCreateDate(LocalDateTime.now());
-        entity.setUpdateDate(LocalDateTime.now());
-        entity.setStatus(true);
+        UserEntity entity = UserEntity.builder()
+                .id(dto.getId())
+                .password(bcryptUtil.encode(dto.getPassword()))  // 비밀번호 암호화 필요 시 encode 처리
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .build();  // 나머지는 기본값이 적용됨
 
         userRepository.save(entity);
 
