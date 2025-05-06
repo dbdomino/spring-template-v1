@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new CoException(ErrorCode.USER_NOT_FOUND));
 
         if (!bcryptUtil.matches(dto.getPassword(), entity.getPassword())) {
-            throw new CoException(ErrorCode.LOGIN_FAIL);
+            throw new CoException(ErrorCode.PASSWORD_MATCH_FAIL);
         }
 
         session.setAttribute("loginUser", entity.getId());
