@@ -1,0 +1,17 @@
+2025.05.06
+1. MapStruct에서 dto → entity 매핑을 사용하던 방식 제거.
+- UserEntity.builder() 직접 사용 방식으로 변경.
+- toUserEntity() 인식 불가 문제 해결 (빌더 방식으로 교체하면서 해결됨).
+- RegistUserResDto 매핑 시 message 누락 경고 해결 (setMessage() 직접 호출).
+2. MapStruct 매핑 오류 해결
+- @Mapping(target = "xxx", ignore = true) 사용 시, 대상 클래스에 필드가 없어서발생한 컴파일 에러 해결.
+3. 암호화 유틸 클래스 분리
+- common-mod에 BcryptUtil 생성.
+4. intellij에서 소스가 마음데로 변하거나 잘려서 출력되는 이슈 확인
+- 소스 자체가 변경된건 아니나, intellij에서 잘리거나 달라져서 출력됨.
+- 원복하고, lombok 자동완성 기능 수정함.(Disabled했다가 다시 활성화)
+5. @ControllerAdvice ApiResponse<T> 형식으로 응답하도록 수정
+- 컨트롤러에서 에러 발생시, ApiResponse<T> 형식으로 응답되도록 응답 변경
+- 에러코드 형식(400~999) 만 대응할 뿐만 아니라, 커스텀 에러코드 (4자리 형식) 도 출력되도록 개선
+6. ApiResponse<T> 형식에 timestamp 찍는거 추가.
+- ApiResponse Dto에 소스 수정
