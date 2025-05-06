@@ -36,10 +36,10 @@ public class GlobalExceptionHandler {
 
     // 그 외 모든 RuntimeException
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse<Void>> handleRuntime(RuntimeException ex) {
+    public ResponseEntity<ApiResponse<String>> handleRuntime(RuntimeException ex) {
         return ResponseEntity
                 .internalServerError()
-                .body(ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR));
+                .body(ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, ex.getMessage()));
     }
 
     // 예외 메시지와 함께 반환하고 싶을 때
