@@ -15,3 +15,4 @@
 - 에러코드 형식(400~999) 만 대응할 뿐만 아니라, 커스텀 에러코드 (4자리 형식) 도 출력되도록 개선
 6. ApiResponse<T> 형식에 timestamp 찍는거 추가.
 - ApiResponse Dto에 소스 수정
+7. gradle 설정변경하면서 intellij 모듈 인식 에러 확인, idea폴더의 module 폴더 삭제 후 재실행해서 해결

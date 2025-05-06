@@ -1,0 +1,40 @@
+🧹 1. 프로젝트 관련 캐시/설정 제거
+프로젝트 루트 (spring-template-api-v1.0)에서 다음 명령을 실행합니다:
+
+bash
+복사
+편집
+# 윈도우라면 Git Bash나 CMD, PowerShell에서
+rd /s /q .idea
+del /s /q *.iml
+rd /s /q .gradle
+또는 IntelliJ 내부에서 .idea, .gradle, *.iml 전부 삭제해도 됩니다.
+
+🔄 2. IntelliJ에서 다시 열기
+IntelliJ에서 File > Open → 루트 디렉터리인 spring-template-api-v1.0 선택
+
+절대 front-app 같은 하위 모듈만 따로 열지 마세요
+
+🔁 3. Gradle 재설정
+IntelliJ 오른쪽 상단에 “Gradle” 탭 또는 “Gradle Sync” 버튼이 있으면 클릭
+
+자동으로 *.iml, .idea 폴더가 새로 생성되고 정상 프로젝트로 구성됨
+
+Project Structure (Ctrl+Alt+Shift+S) → Modules 탭에서 각 모듈이 정상 인식되는지 확인
+
+🛠 4. .gitignore에 아래 포함 (커밋 방지용)
+gitignore
+복사
+편집
+.idea/
+.gradle/
+*.iml
+
+
+📌 실행 체크리스트
+ .idea, .iml, .gradle 삭제
+ 루트 프로젝트 열기 (spring-template-api-v1.0)
+ Gradle 자동 sync 확인
+ 모든 모듈 Modules 탭에서 정상 인식되는지 확인
+ src/main/java, src/main/resources 인식 확인
+ Run > Edit Configurations에서 실행 타겟 설정
