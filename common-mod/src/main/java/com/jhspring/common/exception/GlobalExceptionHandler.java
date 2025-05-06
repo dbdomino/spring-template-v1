@@ -2,6 +2,7 @@ package com.jhspring.common.exception;
 
 import com.jhspring.common.constants.ErrorCode;
 import com.jhspring.common.dto.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,20 +12,19 @@ public class GlobalExceptionHandler {
     // 커스텀 예외 처리 (CoException)
     @ExceptionHandler(CoException.class)
     public ResponseEntity<ApiResponse<Void>> handleCoException(CoException ex) {
-        if (ex.getErrorCode() != null) {
-            return ResponseEntity.status(ex.getStatusCode())
-                    .body(ApiResponse.fail(ex.getErrorCode()));
-        } else {
-            try {
-                ErrorCode errorCode = ErrorCode.valueOf(ex.getMessage());
-                return ResponseEntity.status(errorCode.getStatus())
-                        .body(ApiResponse.fail(errorCode));
-            } catch (IllegalArgumentException e) {
-                // 메시지가 ErrorCode name과 일치하지 않는 경우 fallback
-                return ResponseEntity.status(ex.getStatusCode())
-                        .body(ApiResponse.fail(ex.getMessage()));
-            }
-        }
+        ErrorCode errorCode = ex.getErrorCode();
+
+        HttpStatus httpStatus = switch (errorCode) {
+            case USER_NOT_FOUND, DUPLICATE_ID, PASSWORD_MATCH_FAIL, LOGIN_FAIL -> HttpStatus.BAD_REQUEST;
+            case INVALID_AUTH -> HttpStatus.UNAUTHORIZED;
+            case FORBIDDEN -> HttpStatus.FORBIDDEN;
+            case INTERNAL_SERVER_ERROR -> HttpStatus.INTERNAL_SERVER_ERROR;
+            default -> HttpStatus.BAD_REQUEST;
+        };
+
+        return ResponseEntity
+                .status(httpStatus)
+                .body(ApiResponse.fail(errorCode));
     }
     // 잘못된 인자 예외
     @ExceptionHandler(IllegalArgumentException.class)

@@ -17,6 +17,7 @@ public enum ErrorCode {
     SERVICE_UNAVAILABLE(503, "503 서비스가 일시적으로 사용 불가능합니다."),
     // === 1xxx Auth ERROR ===
     AUTH_FAIL(1001, "인증실패"),
+    PASSWORD_MATCH_FAIL(1002, "비밀번호 틀림"),
     // === 2xxx User ERROR ===
     LOGIN_FAIL(2001, "로그인 실패"),
     DUPLICATE_ID_REGIST_FAIL(2002, "회원가입 실패, 중복된 ID존재"),
