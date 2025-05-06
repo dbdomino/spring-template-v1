@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -39,6 +40,8 @@ public class UserPageServiceImpl implements UserPageService {
 */
         ResponseEntity<ApiResponse<LoginResDto>> response = userClient.post()
                 .uri(uri.getUri())
+//                .bodyValue(reqDto) //
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(reqDto)
                 .retrieve()
                 .toEntity(new ParameterizedTypeReference<>() {
@@ -60,6 +63,7 @@ public class UserPageServiceImpl implements UserPageService {
         System.out.println("[DEBUG] RestClient class = " + userClient.toString());
         ApiResponse<RegistUserResDto> response = userClient.post()
                 .uri(uri.getUri())
+                .header(HttpHeaders.CONTENT_TYPE, "application/json") // 여기 추가
                 .body(reqDto)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {
@@ -79,6 +83,7 @@ public class UserPageServiceImpl implements UserPageService {
 
         ApiResponse<FindmeResDto> response = userClient.get()
                 .uri(uri.getUri())
+                .header(HttpHeaders.CONTENT_TYPE, "application/json") // 여기 추가
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {
@@ -94,6 +99,7 @@ public class UserPageServiceImpl implements UserPageService {
 
         userClient.post()
                 .uri(BackendUri.LOGOUT.getUri())
+                .header(HttpHeaders.CONTENT_TYPE, "application/json") // 여기 추가
                 .header("Cookie", "JSESSIONID=" + jsessionId)
                 .retrieve()
                 .toBodilessEntity(); // 응답 내용 무시

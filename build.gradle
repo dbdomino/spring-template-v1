@@ -89,9 +89,8 @@ project(':app-mod:front-app') {
 
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
         implementation 'org.springframework.boot:spring-boot-starter-web'
-
+        implementation 'org.springframework.boot:spring-boot-starter-json' // 이게 없으면, restClient쓸때  "Content-Type이 application/x-www-form-urlencoded"로 자동으로 바뀌어 json 통신 불가능
     }
 }
 
