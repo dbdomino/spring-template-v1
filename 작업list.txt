@@ -16,3 +16,6 @@
 6. ApiResponse<T> 형식에 timestamp 찍는거 추가.
 - ApiResponse Dto에 소스 수정
 7. gradle 설정변경하면서 intellij 모듈 인식 에러 확인, idea폴더의 module 폴더 삭제 후 재실행해서 해결
+8. 소스코드 intellij에서 확인시 원본파일과 다르게 계속 변경되는 문제 확인
+- 프로젝트 구조도 자기들맘데로 계속 생기는 문제확인.
+- intellij 프로젝트가 꼬여서 생기는 문제, .idea 지우고 다시 실행해야 함.
