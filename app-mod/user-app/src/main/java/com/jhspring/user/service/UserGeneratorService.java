@@ -1,4 +1,4 @@
-package com.jhspring.service;
+package com.jhspring.user.service;
 
 import com.jhspring.data.entity.UserEntity;
 import com.jhspring.data.repository.UserRepository;

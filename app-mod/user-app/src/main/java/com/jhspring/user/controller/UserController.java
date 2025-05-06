@@ -1,12 +1,12 @@
-package com.jhspring.controller;
+package com.jhspring.user.controller;
 
 import com.jhspring.common.dto.ApiResponse;
-import com.jhspring.dto.req.LoginReqDto;
-import com.jhspring.dto.req.RegistUserReqDto;
-import com.jhspring.dto.res.FindmeResDto;
-import com.jhspring.dto.res.LoginResDto;
-import com.jhspring.dto.res.RegistUserResDto;
-import com.jhspring.service.inf.UserService;
+import com.jhspring.user.dto.req.LoginReqDto;
+import com.jhspring.user.dto.req.RegistUserReqDto;
+import com.jhspring.user.dto.res.FindmeResDto;
+import com.jhspring.user.dto.res.LoginResDto;
+import com.jhspring.user.dto.res.RegistUserResDto;
+import com.jhspring.user.service.inf.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package com.jhspring.controller;
+package com.jhspring.user.controller;
 
-import com.jhspring.service.inf.AuthService;
+import com.jhspring.user.service.inf.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

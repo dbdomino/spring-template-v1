@@ -1,4 +1,4 @@
-package com.jhspring.dto.res;
+package com.jhspring.user.dto.res;
 
 import lombok.Getter;
 import lombok.Setter;

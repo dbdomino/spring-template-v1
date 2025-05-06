@@ -1,4 +1,4 @@
-package com.jhspring.service;
+package com.jhspring.user.service;
 
 import com.jhspring.common.constants.ErrorCode;
 import com.jhspring.common.dto.ApiResponse;
@@ -7,13 +7,13 @@ import com.jhspring.common.util.BcryptUtil;
 import com.jhspring.data.entity.UserEntity;
 import com.jhspring.data.mapper.UserEntityMapper;
 import com.jhspring.data.repository.UserRepository;
-import com.jhspring.dto.req.LoginReqDto;
-import com.jhspring.dto.req.RegistUserReqDto;
-import com.jhspring.dto.res.FindmeResDto;
-import com.jhspring.dto.res.LoginResDto;
-import com.jhspring.dto.res.RegistUserResDto;
-import com.jhspring.mapper.UserDtoMapper;
-import com.jhspring.service.inf.UserService;
+import com.jhspring.user.dto.req.LoginReqDto;
+import com.jhspring.user.dto.req.RegistUserReqDto;
+import com.jhspring.user.dto.res.FindmeResDto;
+import com.jhspring.user.dto.res.LoginResDto;
+import com.jhspring.user.dto.res.RegistUserResDto;
+import com.jhspring.user.mapper.UserDtoMapper;
+import com.jhspring.user.service.inf.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

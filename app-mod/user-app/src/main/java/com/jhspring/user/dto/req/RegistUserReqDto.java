@@ -1,4 +1,4 @@
-package com.jhspring.dto.req;
+package com.jhspring.user.dto.req;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

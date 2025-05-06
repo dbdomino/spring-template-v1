@@ -1,8 +1,8 @@
-package com.jhspring.service;
+package com.jhspring.user.service;
 
 import com.jhspring.common.util.BcryptUtil;
 import com.jhspring.data.repository.UserRepository;
-import com.jhspring.service.inf.AuthService;
+import com.jhspring.user.service.inf.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

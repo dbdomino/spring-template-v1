@@ -1,4 +1,4 @@
-package com.jhspring;
+package com.jhspring.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
