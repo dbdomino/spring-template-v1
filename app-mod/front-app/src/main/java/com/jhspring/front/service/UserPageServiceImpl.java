@@ -1,5 +1,7 @@
 package com.jhspring.front.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhspring.common.constants.BackendUri;
 import com.jhspring.common.dto.ApiResponse;
 import com.jhspring.front.dto.req.LoginReqDto;
@@ -15,9 +17,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -58,20 +62,33 @@ public class UserPageServiceImpl implements UserPageService {
     @Override
     public RegistUserResDto register(RegistUserReqDto reqDto) {
         BackendUri uri = BackendUri.REGISTER;
-        System.out.println("[DEBUG] 호출 전 URI = " + uri.getUri());  // /api/v1/user/register
-        System.out.println("[DEBUG] RestClient class = " + userClient.getClass());
-        System.out.println("[DEBUG] RestClient class = " + userClient.toString());
-        ApiResponse<RegistUserResDto> response = userClient.post()
-                .uri(uri.getUri())
-                .header(HttpHeaders.CONTENT_TYPE, "application/json") // 여기 추가
-                .body(reqDto)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {
-                });
-        System.out.println("[DEBUG] 호출 후 URI = " + uri.getUri());  // /api/v1/user/register
-        System.out.println("[DEBUG] RestClient class = " + userClient.getClass());
+        System.out.println("[DEBUG] 호출 전 URI = " + uri.getUri());
 
-        return response.getData();
+        try {
+            ApiResponse<RegistUserResDto> response = userClient.post()
+                    .uri(uri.getUri())
+                    .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .body(reqDto)
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<>() {});
+            System.out.println("[DEBUG] 호출 후 URI = " + uri.getUri());
+            return response.getData();
+        } catch (HttpClientErrorException e) {
+            String responseBody = e.getResponseBodyAsString();
+            System.err.println("[ERROR] 회원가입 실패 응답: " + responseBody);
+
+            // 에러 메시지만 추출해서 던지기 (선택적으로 JSON 파싱 가능)
+            String errorMessage;
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> map = objectMapper.readValue(responseBody, new TypeReference<>() {});
+                errorMessage = (String) map.get("message");
+            } catch (Exception jsonParseException) {
+                errorMessage = "알 수 없는 오류가 발생했습니다.";
+            }
+
+            throw new RuntimeException(errorMessage);  // 컨트롤러에서 잡아서 사용자에게 전달
+        }
     }
 
     @Override
