@@ -1,6 +1,7 @@
 package com.jhspring.data.coreimpl;
 
 import com.jhspring.core.user.User;
+import com.jhspring.data.entity.UserEntity;
 
 public class UserModel implements User {
     private final String id;
@@ -8,11 +9,11 @@ public class UserModel implements User {
     private final boolean status;
     private final String email;
 
-    public UserModel(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.status = user.isStatus();
-        this.email = user.getEmail();
+    public UserModel(UserEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.status = entity.isStatus();
+        this.email = entity.getEmail();
     }
 
     @Override public String getId() { return id; }
