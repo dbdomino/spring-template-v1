@@ -16,11 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserPageController {
     private final UserPageService userPageService;
 
-    // 회원가입 페이지
-    @GetMapping("/signup")
-    public String signupPage() {
-        return "user/signup";
-    }
+
 
     // 대시보드
     @GetMapping("/dashboard")
@@ -34,15 +30,6 @@ public class UserPageController {
         model.addAttribute("name",session.getAttribute("loginName"));
 
         return "dashboard";
-    }
-
-
-
-    @PostMapping("/signup")
-    public String signup(RegistUserReqDto req, RedirectAttributes redirect) {
-        RegistUserResDto res = userPageService.register(req);
-        redirect.addFlashAttribute("message", res.getMessage()); // "가입을 축하합니다" 등
-        return "redirect:/login";
     }
 
 }
