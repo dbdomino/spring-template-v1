@@ -31,9 +31,8 @@ public class LoginController {
             return "redirect:/login";
         }
 
-        session.setAttribute("loginUser", res.getId());
-        session.setAttribute("loginUserName", res.getName());
-        session.setAttribute("loginUserEmail", res.getEmail());
+        session.setAttribute("loginId", res.getId());
+        session.setAttribute("loginName", res.getName());
 
         return "redirect:/dashboard";
     }

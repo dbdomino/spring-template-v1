@@ -25,16 +25,15 @@ public class UserPageController {
     // 대시보드
     @GetMapping("/dashboard")
     public String dashboardPage(HttpSession session, Model model) {
-        Object loginUser = session.getAttribute("loginUser");
+        Object loginId = session.getAttribute("loginId");
 
-        if (loginUser == null) {
+        if (loginId == null) {
             return "redirect:/login?message=로그인이 필요합니다.";
         }
 
-        // 예: 세션에서 username 꺼내서 model에 넣기 (UserModel 구조에 맞게 수정)
-        model.addAttribute("username", /* 예시: ((UserModel) loginUser).getUsername() */ "사용자");
+        model.addAttribute("name",session.getAttribute("loginName"));
 
-        return "user/dashboard";
+        return "dashboard";
     }
 
 
